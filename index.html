@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Library</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: white;
+            margin: 0;
+        }
+
+        header {
+            background: #1f1f1f;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #1b1b1b;
+            overflow-y: auto;
+            border-right: 1px solid #333;
+        }
+
+        .video-item {
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #333;
+        }
+
+        .video-item:hover {
+            background: #333;
+        }
+
+        .player-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        video {
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+
+<header>🎬 My Video Library</header>
+
+<div class="container">
+    <div class="sidebar" id="videoList">
+        <!-- Videos loaded here -->
+    </div>
+
+    <div class="player-section">
+        <video id="videoPlayer" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+    </div>
+</div>
+
+<script>
+    // Add your videos here
+    const videos = [
+        "https://github.com/Tushar-1304/Watch-Video/releases/download/video-v1/video1.mp4",
+        "https://github.com/Tushar-1304/Watch-Video/releases/download/video-v1/video2.mp4"
+    ];
+
+    const videoList = document.getElementById("videoList");
+    const player = document.getElementById("videoPlayer");
+
+    videos.forEach(videoPath => {
+        const item = document.createElement("div");
+        item.className = "video-item";
+
+        const fileName = videoPath.split('/').pop();
+        item.textContent = fileName;
+
+        item.addEventListener("click", () => {
+            player.src = videoPath;
+            player.play();
+        });
+
+        videoList.appendChild(item);
+    });
+
+    if (videos.length > 0) {
+        player.src = videos[0];
+    }
+</script>
+
+</body>
+</html>
